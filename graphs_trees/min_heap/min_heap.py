@@ -54,17 +54,13 @@ class MinHeap(object):
     def _find_smaller_child(self, index):
         left_child_index = 2 * index + 1
         right_child_index = 2 * index + 2
-        # No right child
-        if right_child_index >= len(self.array):
-            # No left child
-            if left_child_index >= len(self.array):
-                return -1
-            # Left child only
-            else:
-                return left_child_index
-        else:
+        if right_child_index < len(self.array):
             # Compare left and right children
-            if self.array[left_child_index] < self.array[right_child_index]:
-                return left_child_index
-            else:
-                return right_child_index
+            return (
+                left_child_index
+                if self.array[left_child_index] < self.array[right_child_index]
+                else right_child_index
+            )
+
+            # No left child
+        return -1 if left_child_index >= len(self.array) else left_child_index
